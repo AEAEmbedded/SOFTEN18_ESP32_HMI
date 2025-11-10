@@ -1,0 +1,24 @@
+{
+  "idf.openOcdConfigs": [
+    "board/esp32s3-builtin.cfg"
+  ],
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "idf.flashType": "UART",
+  "files.associations": {
+    "regex": "cpp",
+    "esp_lvgl_port.h": "c",
+    "touch_driver.h": "c",
+    "lv_demos.h": "c",
+    "board_config.h": "c",
+    "i2c_master.h": "c",
+    "memory_resource": "c",
+    "esp_lcd_touch_gt911.h": "c",
+    "type_traits": "cpp"
+  },
+  "idf.port": "/dev/ttyUSB0",
+  "idf.espIdfPath": "/home/victor/esp/v5.5.1/esp-idf",
+  "idf.toolsPath": "/home/victor/.espressif",
+  "idf.pythonInstallPath": "/usr/bin/python"
+}
