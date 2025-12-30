@@ -23,7 +23,7 @@
  */
 
 #include "display_driver.h"
-#include <config/board_config.h>
+#include <board_config.h>
 #include "esp_lcd_panel_rgb.h"
 #include "esp_lcd_touch_gt911.h"
 

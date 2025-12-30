@@ -23,7 +23,7 @@
  */
 
 #include "touch_driver.h"
-#include <config/board_config.h>
+#include <board_config.h>
 #include "esp_lcd_touch_gt911.h"
 
 static const char TAG[] = "touch_driver";

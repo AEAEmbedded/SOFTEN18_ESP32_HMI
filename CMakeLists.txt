@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.16)
 
 set(IDF_TARGET esp32s3)
 set(CMAKE_CXX_STANDARD 17)
-
+set(EXTRA_COMPONENTS example_ui)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(SOFTEN18_ESP32_HMI)
 
