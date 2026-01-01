@@ -1,15 +1,18 @@
 if(COMMAND idf_component_register)
     # ---- ESP-IDF build ----
     idf_component_register(
-        SRCS "src/ui.c"
-			 "src/images.c"
-			 "src/screens.c"
-			 "src/styles.c"
-			 "src/ui_image_cappuccino.c"
-			 "src/ui_image_meme.c"
-			 "src/ui_image_qr_code.c"
-			 "src/logic.c"
-        INCLUDE_DIRS "include"    
+        SRCS "src/eez_export/ui.c"
+			 "src/eez_export/images.c"
+			 "src/eez_export/screens.c"
+			 "src/eez_export/styles.c"
+			 "src/eez_export/ui_image_cappuccino.c"
+			 "src/eez_export/ui_image_meme.c"
+			 "src/eez_export/ui_image_qr_code.c"
+             "src/ui_main.cpp"
+             "src/ui_logic_prepare_page.cpp"
+             "src/ui_logic_selection_page.cpp"
+             "src/ui_logic_pay_page.cpp"
+        INCLUDE_DIRS "include"  "include/eez_export" 
 		REQUIRES esp_lcd driver lvgl
     )
 else()

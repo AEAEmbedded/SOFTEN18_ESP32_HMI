@@ -43,6 +43,7 @@ typedef struct _objects_t {
     lv_obj_t *total_to_pay_lbl;
     lv_obj_t *total_pay_amount_lbl;
     lv_obj_t *pay_page_back_btn;
+    lv_obj_t *back_btn_lbl;
     lv_obj_t *coffee_prepare_progress_bar;
     lv_obj_t *preparing_coffee_lbl;
     lv_obj_t *progress_lbl;

@@ -3,9 +3,9 @@
 #include <touch_driver.h>
 #include <esp_log.h>
 #include <freertos/FreeRTOS.h>
-extern "C" {
-    #include <ui.h>
-}
+#include <ui_events.hpp>
+#include <ui_main.hpp>
+
 
 static esp_lcd_panel_handle_t lcd_panel = NULL;
 
@@ -17,6 +17,21 @@ static esp_lcd_touch_handle_t touch_handle = NULL;
 static lv_display_t *lvgl_disp = NULL;
 static lv_indev_t *lvgl_touch_indev = NULL;
 
+void hardware_sim_task(void *pvarg)
+{
+    ui_events::unit_state_msg_t state_msg;
+    ui_events::unit_event_msg_t evt_msg;
+    evt_msg.evt_id = ui_events::E_OK;
+    while (1)
+    {
+        if (xQueueReceive(unit_state_queue, &state_msg, portMAX_DELAY) == pdPASS)
+        {
+            xQueueSend(unit_event_queue, &evt_msg, 10);
+        }
+        vTaskDelay(100/portTICK_PERIOD_MS);
+    }
+}
+
 extern "C" void app_main(void)
 {
     ESP_ERROR_CHECK(display_driver_lcd_init(&lcd_panel));
@@ -24,13 +39,7 @@ extern "C" void app_main(void)
     ESP_ERROR_CHECK(display_driver_lvgl_init(lcd_panel, touch_handle, &lvgl_disp, &lvgl_touch_indev));
 
     lvgl_port_lock(0);
-
-    // lv_obj_t *label = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label, "Hello world");
-    // lv_obj_set_style_bg_opa(label, LV_OPA_TRANSP, 0);
-    // lv_obj_set_style_text_color(label, lv_color_hex(0xFF0000), 0);
-    // lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-    ui_init();
-
+    ui_main_init();
     lvgl_port_unlock();
+    xTaskCreate(hardware_sim_task, "hardware_sim", 2048, NULL, 1, NULL);
 }
