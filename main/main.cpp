@@ -1,11 +1,33 @@
+/**
+ * \file            main.cpp
+ * \brief           The main demo file, when running this, it will simulate the machine without fault-events.
+ */
+/*
+ *  Copyright 2025 (C) Victor Hogeweij <victor.hogeweij@han.nl>
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ * This file is part of the SOFTEN18_ESP32_HMI code
+ *
+ * Author:          Victor Hogeweij <victor.hogeweij@han.nl>
+ */
 #include "board_config.h"
 #include <display_driver.h>
 #include <touch_driver.h>
 #include <esp_log.h>
 #include <freertos/FreeRTOS.h>
-#include <ui_events.hpp>
+#include <fsm_logic.hpp>
 #include <ui_main.hpp>
-
 
 static esp_lcd_panel_handle_t lcd_panel = NULL;
 
@@ -28,7 +50,7 @@ void hardware_sim_task(void *pvarg)
         {
             xQueueSend(unit_event_queue, &evt_msg, 10);
         }
-        vTaskDelay(100/portTICK_PERIOD_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 

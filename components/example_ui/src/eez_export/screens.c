@@ -14,11 +14,14 @@ objects_t objects;
 lv_obj_t *tick_value_change_obj;
 uint32_t active_theme_index = 0;
 
-void create_screen_cappucino_chooser_page() {
+void create_screen_cappucino_chooser_page()
+{
     lv_obj_t *obj = lv_obj_create(0);
     objects.cappucino_chooser_page = obj;
     lv_obj_set_pos(obj, 0, 0);
     lv_obj_set_size(obj, 800, 480);
+    lv_obj_add_event_cb(obj, action_cappuccino_page_loaded, LV_EVENT_SCREEN_LOADED, (void *)0);
+    lv_obj_add_event_cb(obj, action_cappuccino_page_unloaded, LV_EVENT_SCREEN_UNLOADED, (void *)0);
     lv_obj_set_style_bg_color(obj, lv_color_hex(0xff242424), LV_PART_MAIN | LV_STATE_DEFAULT);
     {
         lv_obj_t *parent_obj = obj;
@@ -28,7 +31,7 @@ void create_screen_cappucino_chooser_page() {
             objects.coffee_slider_and_buttons_panel = obj;
             lv_obj_set_pos(obj, 400, 80);
             lv_obj_set_size(obj, 355, 322);
-            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_WITH_ARROW);
+            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_CHAIN_HOR | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_WITH_ARROW);
             lv_obj_set_style_bg_color(obj, lv_color_hex(0xff434241), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
             {
@@ -304,14 +307,16 @@ void create_screen_cappucino_chooser_page() {
             lv_label_set_text(obj, "|");
         }
     }
-    
+
     tick_screen_cappucino_chooser_page();
 }
 
-void tick_screen_cappucino_chooser_page() {
+void tick_screen_cappucino_chooser_page()
+{
 }
 
-void create_screen_pay_page() {
+void create_screen_pay_page()
+{
     lv_obj_t *obj = lv_obj_create(0);
     objects.pay_page = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -382,14 +387,16 @@ void create_screen_pay_page() {
             }
         }
     }
-    
+
     tick_screen_pay_page();
 }
 
-void tick_screen_pay_page() {
+void tick_screen_pay_page()
+{
 }
 
-void create_screen_prepare_coffee_page() {
+void create_screen_prepare_coffee_page()
+{
     lv_obj_t *obj = lv_obj_create(0);
     objects.prepare_coffee_page = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -455,7 +462,7 @@ void create_screen_prepare_coffee_page() {
             lv_textarea_set_text(obj, "Share your coffee experience!\n\nScan this QR-code and share with us how much you liked your freshly set coffee:");
             lv_textarea_set_one_line(obj, false);
             lv_textarea_set_password_mode(obj, false);
-            lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE|LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_SCROLLABLE);
+            lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_SCROLLABLE);
             lv_obj_set_style_text_color(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_color(obj, lv_color_hex(0xff2b2b2b), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
@@ -472,14 +479,13 @@ void create_screen_prepare_coffee_page() {
             lv_obj_add_flag(obj, LV_OBJ_FLAG_CLICKABLE);
         }
     }
-    
+
     tick_screen_prepare_coffee_page();
 }
 
-void tick_screen_prepare_coffee_page() {
+void tick_screen_prepare_coffee_page()
+{
 }
-
-
 
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
@@ -487,18 +493,21 @@ tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_pay_page,
     tick_screen_prepare_coffee_page,
 };
-void tick_screen(int screen_index) {
+void tick_screen(int screen_index)
+{
     tick_screen_funcs[screen_index]();
 }
-void tick_screen_by_id(enum ScreensEnum screenId) {
+void tick_screen_by_id(enum ScreensEnum screenId)
+{
     tick_screen_funcs[screenId - 1]();
 }
 
-void create_screens() {
+void create_screens()
+{
     lv_disp_t *dispp = lv_disp_get_default();
     lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    
+
     create_screen_cappucino_chooser_page();
     create_screen_pay_page();
     create_screen_prepare_coffee_page();

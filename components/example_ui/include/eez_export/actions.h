@@ -19,6 +19,8 @@ extern void action_pay_page_unloaded(lv_event_t * e);
 extern void action_menu_back_button(lv_event_t * e);
 extern void action_prepare_page_loaded(lv_event_t * e);
 extern void action_prepare_page_unloaded(lv_event_t * e);
+extern void action_cappuccino_page_loaded(lv_event_t * e);
+extern void action_cappuccino_page_unloaded(lv_event_t * e);
 
 
 #ifdef __cplusplus
