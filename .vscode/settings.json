@@ -20,5 +20,6 @@
   "idf.port": "/dev/ttyUSB0",
   "idf.espIdfPath": "/home/victor/esp/v5.5.1/esp-idf",
   "idf.toolsPath": "/home/victor/.espressif",
-  "idf.pythonInstallPath": "/usr/bin/python"
+  "idf.pythonInstallPath": "C:\\Users\\tuhii\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.portWin": "COM4"
 }

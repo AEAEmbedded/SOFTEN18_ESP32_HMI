@@ -12,5 +12,6 @@
     "--compile-commands-dir=/home/victor/Documents/clean_repo_clone/SOFTEN18_ESP32_HMI/unity-app/build"
   ],
   "idf.port": "/dev/ttyUSB0",
-  "idf.flashType": "UART"
+  "idf.flashType": "UART",
+  "idf.portWin": "COM4"
 }
